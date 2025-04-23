@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class RegistroUsuarios {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String nombre, correo, contrasena;
+
+        System.out.println("Bienvenido al sistema de registro de usuarios\n");
+
+        do {
+            System.out.print("Ingrese su nombre: ");
+            nombre = scanner.nextLine();
+            if (!Validador.validarNombre(nombre)) {
+                System.out.println("Nombre inválido. Debe contener solo letras y mínimo 2 caracteres.");
+            }
+        } while (!Validador.validarNombre(nombre));
+
+        do {
+            System.out.print("Ingrese su correo electrónico: ");
+            correo = scanner.nextLine();
+            if (!Validador.validarCorreo(correo)) {
+                System.out.println("Correo inválido. Debe tener un formato válido como ejemplo@dominio.com");
+            }
+        } while (!Validador.validarCorreo(correo));
+
+        do {
+            System.out.print("Cree una contraseña segura: ");
+            contrasena = scanner.nextLine();
+            if (!Validador.validarContrasena(contrasena)) {
+                System.out.println("Contraseña inválida. Debe tener mínimo 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.");
+            }
+        } while (!Validador.validarContrasena(contrasena));
+
+        Usuario nuevoUsuario = new Usuario(nombre, correo, contrasena);
+        nuevoUsuario.mostrarDatos();
+
+        scanner.close();
+    }
+}
